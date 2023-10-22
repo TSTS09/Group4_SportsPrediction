@@ -66,5 +66,5 @@ def main():
         st.success(f"Player: {player_name} ; Overall Rating: {output[0]}")
 
 
-if _name=='main_':
+if __name__=='__main__':
         main()
