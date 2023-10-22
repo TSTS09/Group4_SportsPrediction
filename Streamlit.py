@@ -28,7 +28,12 @@ def predict(movement_reactions,mentality_composure,passing,potential,dribbling,
 
 
     prediction = loaded_model.predict(new_df)
-    return prediction
+    #Calculating the confidence score
+    regressors = loaded_model.estimators_
+    predictions_each_model = np.array([regressor.predict(new_df) for regressor in regressors])
+    variance = np.var(predictions_each_model)
+
+    return prediction,variance
 
 
 
@@ -61,10 +66,11 @@ def main():
 
 
     if st.button("Predict"):
-        output = predict(movement_reactions,mentality_composure,passing,potential,dribbling,
+        output, confidence_score = predict(movement_reactions,mentality_composure,passing,potential,dribbling,
                                 power_shot_power,physic,mentality_vision,attacking_short_passing,skill_long_passing)
         
         st.success(f"Player: {player_name} ; Overall Rating: {output[0]}")
+        st.info(f"Confidence Score (variance): {confidence_score}")
 
 
 if __name__=='__main__':
