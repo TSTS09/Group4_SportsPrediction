@@ -36,9 +36,9 @@ def main():
     #st.title("Arrest count prediction")
     st.write("This message is displayed in streamlit")
     html_temp = """
-<div style = "background-color:tomato;padding:10px">
-     <h2 style="color:blue;text-align:center;">
-      Streamlit Fifa Player Prediction ML App </h2>
+<div style = "background-color:black;padding:10px">
+     <h2 style="color:white;text-align:center;">
+      Fifa Player Overall Rating Prediction App </h2>
       </div>
       """
     
@@ -48,16 +48,17 @@ def main():
     #Taking in the features for the prediction.
     
     player_name = st.text_input("Player name", "Type here")
-    movement_reactions = st.text_input("movement_reactions","Type here")
-    mentality_composure = st.text_input("mentality_composure","Type here")
-    passing = st.text_input("passing","Type here")
-    potential = st.text_input("potential","Type here")
-    dribbling = st.text_input("dribbling","Type here")
-    power_shot_power = st.text_input("power_shot_power","Type here")
-    physic = st.text_input("physic","Type here")
-    mentality_vision = st.text_input("mentality_vision","Type here")
-    attacking_short_passing = st.text_input("attacking_short_passing","Type here")
-    skill_long_passing = st.text_input("skill_long_passing","Type here")
+    movement_reactions = st.text_input("movement_reactions (/100)","Type here")
+    mentality_composure = st.text_input("mentality_composure (/100)","Type here")
+    passing = st.text_input("passing (/100)","Type here")
+    potential = st.text_input("potential (/100)","Type here")
+    dribbling = st.text_input("dribbling (/100)","Type here")
+    power_shot_power = st.text_input("power_shot_power (/100)","Type here")
+    physic = st.text_input("physic (/100)","Type here")
+    mentality_vision = st.text_input("mentality_vision (/100)","Type here")
+    attacking_short_passing = st.text_input("attacking_short_passing (/100)","Type here")
+    skill_long_passing = st.text_input("skill_long_passing (/100)","Type here")
+
 
     if st.button("Predict"):
         output = predict(movement_reactions,mentality_composure,passing,potential,dribbling,
