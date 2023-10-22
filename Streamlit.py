@@ -2,6 +2,9 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import joblib
+from sklearn.preprocessing import StandardScaler
+
+
 
 
 #Fetching the model
@@ -19,12 +22,12 @@ def predict(movement_reactions,mentality_composure,passing,potential,dribbling,
     
     #Pre-processing the data
     #Scaling the features 
-    #model_scaler = StandardScaler()
-    #scaled_features=model_scaler.fit_transform(data_df)
-    # new_df = pd.DataFrame(scaled_features, columns=data_df.columns)
+    model_scaler = StandardScaler()
+    scaled_features=model_scaler.fit_transform(data_df)
+    new_df = pd.DataFrame(scaled_features, columns=data_df.columns)
 
 
-    prediction = loaded_model.predict(data_df)
+    prediction = loaded_model.predict(new_df)
     return prediction
 
 
@@ -44,7 +47,7 @@ def main():
 
     #Taking in the features for the prediction.
     
-
+    player_name = st.text_input("Player name", "Type here")
     movement_reactions = st.text_input("movement_reactions","Type here")
     mentality_composure = st.text_input("mentality_composure","Type here")
     passing = st.text_input("passing","Type here")
@@ -59,16 +62,9 @@ def main():
     if st.button("Predict"):
         output = predict(movement_reactions,mentality_composure,passing,potential,dribbling,
                                 power_shot_power,physic,mentality_vision,attacking_short_passing,skill_long_passing)
-        st.success(output)
+        
+        st.success(f"Player: {player_name} ; Overall Rating: {output[0]}")
 
 
-if __name__=='__main__':
+if _name=='main_':
         main()
-
-
-    
-    
-
-
-
-
